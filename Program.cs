@@ -22,7 +22,11 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+
+
 app.UseMiddleware<RequestLoggingMiddleware>();
+
+//app.UseMiddleware<CheckDBMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

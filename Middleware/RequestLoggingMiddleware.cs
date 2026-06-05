@@ -15,8 +15,12 @@
             var method = context.Request.Method;
             var path = context.Request.Path.ToString();
 
-            Console.WriteLine($"[{time}] Method: {method} - Path: {path}");
-
+            // chỉ ghi log với CRUD Book, lọc bỏ log các path bootstrap, jquery, css, js
+            if (path.Contains("/Book"))
+            {
+                Console.WriteLine($"[Time before action: {time}] Method: {method} - Path: {path}");
+            }
+            
             if (path == "/Book/Detail/0" || path == "/Book/Detail/-1")
             {
                 context.Response.StatusCode = 400;
@@ -26,9 +30,14 @@
 
             await _next(context);
 
-            var timeAfter = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            if (path.Contains("/Book"))
+            {
+                var timeAfter = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-            Console.WriteLine($"Time After action: [{timeAfter}]");
+                Console.WriteLine($"Time After action: [{timeAfter}]");
+            }
+
+                
         }
     }
 }
