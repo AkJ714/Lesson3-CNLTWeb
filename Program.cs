@@ -1,3 +1,5 @@
+using Lesson3_CNLTWeb.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +21,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
