@@ -1,4 +1,5 @@
 using Lesson3_CNLTWeb.Middleware;
+using Lesson3_CNLTWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Initialize BookRepository with connection strings from configuration
+var masterConn = builder.Configuration.GetConnectionString("MasterConnection");
+var defaultConn = builder.Configuration.GetConnectionString("DefaultConnection");
+BookRepository.Initialize(masterConn, defaultConn);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

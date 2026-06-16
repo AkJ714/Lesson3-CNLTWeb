@@ -10,15 +10,30 @@
     <div class="alert alert-success">@TempData["SuccessMessage"]</div>
 }
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Thêm sách</a>
-</p>
+<div class="mb-3">
+    <form method="get" class="row g-2">
+        <div class="col-auto">
+            <input type="text" name="search" value="@(ViewData["CurrentSearch"] ?? "")" class="form-control" placeholder="Tìm theo tên sách" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary">Tìm</button>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Index" asp-route-sortOrder="price_asc" asp-route-search="@(ViewData["CurrentSearch"] ?? "")" class="btn btn-link">Giá tăng</a>
+            <a asp-action="Index" asp-route-sortOrder="price_desc" asp-route-search="@(ViewData["CurrentSearch"] ?? "")" class="btn btn-link">Giá giảm</a>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Create" class="btn btn-primary">Thêm sách</a>
+        </div>
+    </form>
+</div>
 
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Author</th>
             <th>Price</th>
             <th></th>
         </tr>
@@ -29,9 +44,12 @@
             <tr>
                 <td>@book.Id</td>
                 <td>@book.Name</td>
+                <td>@book.Author</td>
                 <td>@book.Price</td>
-                <td>
-                    <a asp-action="Detail" asp-route-id="@book.Id">Chi tiết</a>
+            <td>
+                    <a asp-action="Detail" asp-route-id="@book.Id">Chi tiết</a> |
+                    <a asp-action="Edit" asp-route-id="@book.Id">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@book.Id">Xóa</a>
                 </td>
             </tr>
         }

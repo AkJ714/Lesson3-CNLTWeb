@@ -1,11 +1,12 @@
 @model Book
 @{
-    ViewData["Title"] = "Thêm sách";
+    ViewData["Title"] = "Sửa sách";
 }
 
-<h1>Thêm sách</h1>
+<h1>Sửa sách</h1>
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="mb-3">
@@ -26,7 +27,7 @@
         <span asp-validation-for="Author" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Thêm</button>
+    <button type="submit" class="btn btn-primary">Lưu</button>
     <a asp-action="Index" class="btn btn-secondary">Hủy</a>
 </form>
 
